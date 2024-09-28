@@ -19,6 +19,8 @@ When we push new commits to the girhub repo, it will tell (via a webhook) CodeBu
 
 Instead, we don't stop here since we want to serve the site via HTTPS (for security reason), and avoid making the S3 bucket public (again for security reason). These can be done using CloudFront. CloudFront is a CDN that reads the S3 bucket and serves the contents to the public. In this way, the user has no access to the S3 bucket (they can only access what CloudFront provides), and we can use HTTPS since CloudFront support HTTPS serving.
 
+**Update: This stack is now deployed using [Terraform](https://www.terraform.io/). So most of part 2 below are now automatic.**
+
 # 2. An outline of the steps required
 
 A very brief outline of what I did:
