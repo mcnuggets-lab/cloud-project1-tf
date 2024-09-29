@@ -14,15 +14,6 @@ resource "aws_codebuild_project" "project1" {
   tags_all       = {}
 
   artifacts {
-    # artifact_identifier    = null
-    # bucket_owner_access    = null
-    # encryption_disabled    = false
-    # location               = null
-    # name                   = null
-    # namespace_type         = null
-    # override_artifact_name = false
-    # packaging              = null
-    # path                   = null
     type = "NO_ARTIFACTS"
   }
 
@@ -91,4 +82,30 @@ resource "aws_iam_role" "project1_codebuild" {
   # permissions_boundary  = null
   tags     = local.common_tags
   tags_all = {}
+}
+
+data "aws_iam_policy_document" "project1_codebuild_policy" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+    ]
+    resources = ["*"]
+  }
+
+  statement {
+    effect  = "Allow"
+    actions = ["s3:*"]
+    resources = [
+      aws_s3_bucket.website_bucket.arn,
+      "${aws_s3_bucket.website_bucket.arn}/*",
+    ]
+  }
+}
+
+resource "aws_iam_role_policy" "project1_codebuild_role_policy" {
+  role   = aws_iam_role.project1_codebuild.name
+  policy = data.aws_iam_policy_document.project1_codebuild_policy.json
 }
