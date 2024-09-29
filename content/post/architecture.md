@@ -7,7 +7,7 @@ publishDate: "2024-07-04T12:03:16+08:00"
 
 # 1. Architecture Overview
 
-Source code is available in https://github.com/mcnuggets-lab/cloud-project1.
+Source code is available in https://github.com/mcnuggets-lab/cloud-project1-tf.
 
 This work is based on https://github.com/noahgift/dukehugofeb1, with some non-trivial modifications and added components to make it work better. Here I try to explain the architecture of this site using my own words.
 
