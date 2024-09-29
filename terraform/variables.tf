@@ -21,6 +21,12 @@ variable "aws_session_token" {
 
 variable "project_name" {
   type        = string
-  description = "(Required) Name of the project."
+  description = "(Optional) Name of the project."
   default     = "kithomak-cloud-project-1"
+}
+
+variable "git_repo" {
+  type        = string
+  description = "(Optional) Github repo."
+  default     = "https://github.com/mcnuggets-lab/cloud-project1-tf.git"
 }
