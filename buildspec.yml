@@ -19,6 +19,7 @@ phases:
     commands:
       - rm -rf public
       - hugo
+      - cp -r static/images public/
       - aws s3 sync public/ s3://${BUCKET_ID}/ --region ${AWS_REGION} --delete
   post_build:
     commands:
