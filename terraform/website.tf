@@ -47,3 +47,11 @@ resource "local_file" "buildspec_yml" {
   })
   filename = "../buildspec.yml"
 }
+
+resource "local_file" "readme" {
+  content = templatefile("templates/README.md.tpl", {
+    cloudfront_url_endpoint = "https://${aws_cloudfront_distribution.distribution.domain_name}"
+    badge_url               = aws_codebuild_project.project1.badge_url
+  })
+  filename = "../README.md"
+}
