@@ -48,6 +48,19 @@ resource "aws_codebuild_project" "project1" {
   }
 }
 
+resource "aws_codebuild_webhook" "webhook" {
+  branch_filter = null
+  build_type    = "BUILD"
+  project_name  = aws_codebuild_project.project1.name
+  filter_group {
+    filter {
+      exclude_matched_pattern = false
+      pattern                 = "PUSH"
+      type                    = "EVENT"
+    }
+  }
+}
+
 resource "aws_iam_role" "project1_codebuild" {
   name        = "${var.project_name}-codebuild-service-role"
   description = null
