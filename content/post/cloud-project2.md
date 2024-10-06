@@ -7,7 +7,7 @@ publishDate: "2024-07-09T15:57:58+08:00"
 
 # 1. Introduction
 
-You can play with the webapp [here](https://d44w85u9f6yan.cloudfront.net/).
+You can play with the webapp [here](https://d16y04fvgjdqwq.cloudfront.net/).
 
 Source code is available in https://github.com/mcnuggets-lab/cloud-project2.
 
@@ -37,9 +37,7 @@ This webapp uses very different technology from the blog that you are currently 
 
 # 2. Architecture
 
-We end up using AWS Lambda to run a container that contains the webapp written in flask. To trigger the lambda function, we use an API gateway to accept requests, and broadcasted the API by CloudFront.
-
-To simplify the deployment, we use [Serverless](https://www.serverless.com/) to generate a CloudFormation stack that automate most of the steps. This also gives me a first taste of Infrastructure as Code (IaC).
+We end up using AWS Lambda to run a container that contains the webapp written in flask. To trigger the lambda function, we use an API gateway to accept requests, and broadcasted the API by CloudFront. The whole stack is deployed using [Terraform](https://www.terraform.io/).
 
 The architecture looks like this.
 
@@ -56,11 +54,10 @@ A very brief outline of what I did:
    - An endpoint to process the request.
 <br/><br/>
 3. To deploy in AWS Lambda, we need a handler function, thus we cannot use flask's default development server (or maybe I don't know how to do that). So we need to make our flask webapp Lambda-compatible. This can be easily achieved by the simple-to-use `serverless-wsgi` package.
-4. Write a `Dockerfile` to define how an image would be built. You don't need to build the image yourself, since Serverless will take care of that. You could build one to test if your container is working properly if you like. See docuemntation from Serverless on how to trigger the lambda function in a container locally.
-5. Write a `serverless.yml` file to specify how to provision the stack. There are a lot of tutorials online on how to do this.
-6. Give enough permission to the AWS user to perform everything in the stack. The specific permission required depends on what resources is needed. A good starting point is [this one](https://dav009.medium.com/serverless-framework-minimal-iam-role-permissions-ba34bec0154e).
-7. Deploy your stack using `serverless deploy`.
-8. Set up CloudFront to broadcast your API gateway.
+4. Write a `Dockerfile` to define how an image would be built. You don't need to build the image yourself, since Terraform will take care of that. You could build one to test if your container is working properly if you like. You will need the [AWS SAM cli](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-local-invoke.html) to trigger the lambda function locally.
+5. Give enough permission to the AWS user to perform everything in the stack. The specific permission required depends on what resources is needed. A good starting point is [this one](https://dav009.medium.com/serverless-framework-minimal-iam-role-permissions-ba34bec0154e).
+6. Write Terraform codes to specify how to provision the stack. I cannot make the docker provider works, and therefore need a `local-exec`, but other parts are fine.
+7. Deploy your stack using Terraform.
 
 # 4. Things that I end up not doing
 
