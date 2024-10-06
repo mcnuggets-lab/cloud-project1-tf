@@ -9,7 +9,7 @@ publishDate: "2024-07-09T15:57:58+08:00"
 
 You can play with the webapp [here](https://d16y04fvgjdqwq.cloudfront.net/).
 
-Source code is available in https://github.com/mcnuggets-lab/cloud-project2.
+Source code is available in https://github.com/mcnuggets-lab/cloud-project2-tf.
 
 This is a very simple Q&A model based on the very small [BERT-Tiny](https://huggingface.co/mrm8488/bert-tiny-5-finetuned-squadv2). To use this model, you need to provide **both the question and the context**. The model will answer the question according to the context only. For example, if
 
