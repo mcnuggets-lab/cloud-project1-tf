@@ -41,7 +41,7 @@ We end up using AWS Lambda to run a container that contains the webapp written i
 
 The architecture looks like this.
 
-![cloud-project2-architecture](https://github.com/mcnuggets-lab/cloud-project2/assets/16054484/e30696f5-dc28-46a3-84b8-f9d8af15b017)
+![cloud-project2-tf-architecture](https://github.com/user-attachments/assets/af398b83-dd14-4282-8449-6717851eb1b5)
 
 # 3. An outline of the steps required
 
